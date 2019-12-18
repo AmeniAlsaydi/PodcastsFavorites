@@ -13,7 +13,7 @@ class FavoritesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private var refreshControl: UIRefreshControl!
     
-    var favorites = [FavoritePodcast]() {
+    var favorites = [Podcast]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -36,7 +36,7 @@ class FavoritesViewController: UIViewController {
             fatalError("couldnt get detailVC or indexPath")
         }
         
-        detailVC.favoritePodcast = favorites[indexPath.row]
+        detailVC.podcast = favorites[indexPath.row]
     }
     
     func configureRefreshControl() {

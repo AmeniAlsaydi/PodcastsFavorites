@@ -18,12 +18,10 @@ class PodcastDetailController: UIViewController {
     @IBOutlet weak var podcastImage: UIImageView!
     
     var podcast: Podcast?
-    var favoritePodcast: FavoritePodcast?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        getFavPodInfo()
-        updatePodcastUI()
+        updateUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -31,13 +29,11 @@ class PodcastDetailController: UIViewController {
         
         podcastImage.layer.cornerRadius = podcastImage.frame.width/20
     }
-    
-   
-    
-    func updatePodcastUI() {
+    func updateUI() {
         guard let thePodcast = podcast else {
             return
         }
+        
         trackId.text = thePodcast.trackId.description
         trackNameLabel.text = thePodcast.collectionName
         artistName.text = thePodcast.artistName
@@ -55,47 +51,29 @@ class PodcastDetailController: UIViewController {
             }
         }
         
-    }
-    
-    func getFavPodInfo() {
-        
-        guard let favoritedPodcast = favoritePodcast else {
-            return 
-                   //fatalError("check prepare for segue")
-               }
-        
-        PodcastAPIClient.getPodcastUsingId(podId: favoritedPodcast.trackId) { [weak self] (result) in
-            switch result {
-                
-            case .failure(let appError):
-                print("issue with getFavPodInfo function: \(appError)")
-            case .success(let podcasts):
-                self?.podcast = podcasts.first
-                DispatchQueue.main.async {
-                    self?.updatePodcastUI()
-                    let heartImage = UIImage(systemName: "heart.fill")
-                    self?.favoriteButton.setImage(heartImage, for: .normal)
-                    self?.favoriteButton.isEnabled = false
-                }
-                
-            }
+        if thePodcast.favoritedBy != nil {
+            let heartImage = UIImage(systemName: "heart.fill")
+            self.favoriteButton.setImage(heartImage, for: .normal)
+            self.favoriteButton.isEnabled = false
         }
         
     }
     
+
     @IBAction func favoriteButtonPressed(_ sender: UIButton) {
         
         let heartImage = UIImage(systemName: "heart.fill")
         favoriteButton.setImage(heartImage, for: .normal)
         sender.isEnabled = false
         
-        guard let thePodcast = podcast else {
+        guard let thePodcast = podcast else { // podcast is nil 
             fatalError("issue with prepare for segue")
         }
         
-        //create a instance of FavoritePodcast
+        //create a instance of Podcast
         
-        let favoritedPodcast = FavoritePodcast(trackId: thePodcast.trackId, favoritedBy: "Bob Bobby", collectionName: thePodcast.collectionName, artworkUrl600: thePodcast.artworkUrl600)
+        let favoritedPodcast = Podcast(trackId: thePodcast.trackId, artworkUrl600: thePodcast.artworkUrl600, collectionName: thePodcast.collectionName, primaryGenreName: thePodcast.primaryGenreName, artistName: thePodcast.artistName, favoritedBy: "Bob Bobby")
+        
         
         PodcastAPIClient.postFavorite(favoritedPodcast: favoritedPodcast) { [weak self] (result) in
             switch result {

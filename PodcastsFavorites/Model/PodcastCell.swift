@@ -38,7 +38,7 @@ class PodcastCell: UITableViewCell {
         
     }
     
-    func configureFavCell(for favoritePod: FavoritePodcast) {
+    func configureFavCell(for favoritePod: Podcast) {
         trackName.text = favoritePod.collectionName
         
         podcastImage.getImage(with: favoritePod.artworkUrl600) { [weak self] (result) in

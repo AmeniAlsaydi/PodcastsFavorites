@@ -19,9 +19,7 @@
 		B743B39D23A849C800A56240 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B39C23A849C800A56240 /* Podcast.swift */; };
 		B743B3A023A8910C00A56240 /* VC-Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B39F23A8910C00A56240 /* VC-Alerts.swift */; };
 		B743B3A223A8990B00A56240 /* PodcastDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B3A123A8990B00A56240 /* PodcastDetailController.swift */; };
-		B743B3A423A92E1000A56240 /* FavoritePodcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B3A323A92E1000A56240 /* FavoritePodcast.swift */; };
 		B743B3A623A93D2C00A56240 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B3A523A93D2C00A56240 /* FavoritesViewController.swift */; };
-		B743B3A823A9554700A56240 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B3A723A9554700A56240 /* FavoritesDetailController.swift */; };
 		B743B3AA23A957FB00A56240 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B3A923A957FB00A56240 /* UIImageViewExtension.swift */; };
 		B743B3AC23A9612300A56240 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B743B3AB23A9612300A56240 /* PodcastCell.swift */; };
 /* End PBXBuildFile section */
@@ -41,9 +39,7 @@
 		B743B39C23A849C800A56240 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		B743B39F23A8910C00A56240 /* VC-Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC-Alerts.swift"; sourceTree = "<group>"; };
 		B743B3A123A8990B00A56240 /* PodcastDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailController.swift; sourceTree = "<group>"; };
-		B743B3A323A92E1000A56240 /* FavoritePodcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePodcast.swift; sourceTree = "<group>"; };
 		B743B3A523A93D2C00A56240 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		B743B3A723A9554700A56240 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
 		B743B3A923A957FB00A56240 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		B743B3AB23A9612300A56240 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,7 +94,6 @@
 				B743B38323A83B7900A56240 /* PodcastsViewController.swift */,
 				B743B3A123A8990B00A56240 /* PodcastDetailController.swift */,
 				B743B3A523A93D2C00A56240 /* FavoritesViewController.swift */,
-				B743B3A723A9554700A56240 /* FavoritesDetailController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -117,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				B743B39C23A849C800A56240 /* Podcast.swift */,
-				B743B3A323A92E1000A56240 /* FavoritePodcast.swift */,
 				B743B3AB23A9612300A56240 /* PodcastCell.swift */,
 			);
 			path = Model;
@@ -207,14 +201,12 @@
 				B743B39D23A849C800A56240 /* Podcast.swift in Sources */,
 				B743B38423A83B7900A56240 /* PodcastsViewController.swift in Sources */,
 				B743B3A023A8910C00A56240 /* VC-Alerts.swift in Sources */,
-				B743B3A823A9554700A56240 /* FavoritesDetailController.swift in Sources */,
 				B743B39A23A8479700A56240 /* PodcastAPIClient.swift in Sources */,
 				B743B3A223A8990B00A56240 /* PodcastDetailController.swift in Sources */,
 				B743B3A623A93D2C00A56240 /* FavoritesViewController.swift in Sources */,
 				B743B3AC23A9612300A56240 /* PodcastCell.swift in Sources */,
 				B743B39723A8458C00A56240 /* AppError.swift in Sources */,
 				B743B38023A83B7900A56240 /* AppDelegate.swift in Sources */,
-				B743B3A423A92E1000A56240 /* FavoritePodcast.swift in Sources */,
 				B743B3AA23A957FB00A56240 /* UIImageViewExtension.swift in Sources */,
 				B743B38223A83B7900A56240 /* SceneDelegate.swift in Sources */,
 			);

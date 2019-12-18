@@ -31,7 +31,7 @@ class PodcastsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         tableView.dataSource = self
         searchBar.delegate = self
         loadPodcasts()

@@ -38,38 +38,8 @@ struct PodcastAPIClient {
         }
     }
     
-    static func getPodcastUsingId(podId: Int, completion: @escaping (Result<[Podcast], AppError>)-> ()) {
-        
-        let endpointURL = "https://itunes.apple.com/search?media=podcast&limit=200&term=\(podId)"
-        
-        guard let url = URL(string: endpointURL) else {
-            completion(.failure(.badURL(endpointURL))) //  assigning the competion handler a failure
-            return
-        }
-        
-        let request = URLRequest(url: url)
-        
-        NetworkHelper.shared.performDataTask(with: request) {(result) in
-            switch result {
-            case .failure(let appError):
-                completion(.failure(.networkClientError(appError)))
-            case .success(let data):
-                do {
-                    let search = try JSONDecoder().decode(PodcastSearch.self, from: data)
-                    let podcasts = search.results
-                    
-                    completion(.success(podcasts))
-                } catch {
-                    completion(.failure(.decodingError(error)))
-                }
-                
-            }
-        }
-    }
     
-    
-    
-    static func getFavorites(completion: @escaping (Result<[FavoritePodcast], AppError>)-> ()) {
+    static func getFavorites(completion: @escaping (Result<[Podcast], AppError>)-> ()) {
         let endpointURL = "https://5c2e2a592fffe80014bd6904.mockapi.io/api/v1/favorites"
         
         guard let url = URL(string: endpointURL) else {
@@ -85,7 +55,7 @@ struct PodcastAPIClient {
                 completion(.failure(.networkClientError(appError)))
             case .success(let data):
                 do {
-                    let favorites = try JSONDecoder().decode([FavoritePodcast].self, from: data)
+                    let favorites = try JSONDecoder().decode([Podcast].self, from: data)
                     
                     completion(.success(favorites))
                 } catch {
@@ -96,7 +66,7 @@ struct PodcastAPIClient {
         
     }
     
-    static func postFavorite(favoritedPodcast: FavoritePodcast, completion: @escaping (Result<Bool, AppError>)-> ()){
+    static func postFavorite(favoritedPodcast: Podcast, completion: @escaping (Result<Bool, AppError>)-> ()){
         
         let endpointURL = "https://5c2e2a592fffe80014bd6904.mockapi.io/api/v1/favorites"
         
