@@ -37,7 +37,6 @@ class PodcastDetailController: UIViewController {
     func updatePodcastUI() {
         guard let thePodcast = podcast else {
             return
-            //fatalError("issue with prepare for segue")
         }
         trackId.text = thePodcast.trackId.description
         trackNameLabel.text = thePodcast.collectionName
@@ -65,15 +64,18 @@ class PodcastDetailController: UIViewController {
                    //fatalError("check prepare for segue")
                }
         
-        PodcastAPIClient.getPodcastUsingId(podId: favoritedPodcast.trackId) { (result) in
+        PodcastAPIClient.getPodcastUsingId(podId: favoritedPodcast.trackId) { [weak self] (result) in
             switch result {
                 
             case .failure(let appError):
                 print("issue with getFavPodInfo function: \(appError)")
             case .success(let podcasts):
-                self.podcast = podcasts.first
+                self?.podcast = podcasts.first
                 DispatchQueue.main.async {
-                    self.updatePodcastUI()
+                    self?.updatePodcastUI()
+                    let heartImage = UIImage(systemName: "heart.fill")
+                    self?.favoriteButton.setImage(heartImage, for: .normal)
+                    self?.favoriteButton.isEnabled = false
                 }
                 
             }
@@ -108,6 +110,4 @@ class PodcastDetailController: UIViewController {
         }
         
     }
-    
-
 }

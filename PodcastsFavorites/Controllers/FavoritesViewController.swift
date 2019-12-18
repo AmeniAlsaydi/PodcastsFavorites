@@ -11,6 +11,7 @@ import UIKit
 class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    private var refreshControl: UIRefreshControl!
     
     var favorites = [FavoritePodcast]() {
         didSet {
@@ -25,6 +26,7 @@ class FavoritesViewController: UIViewController {
         tableView.dataSource = self
         loadFavorites()
         tableView.delegate = self
+        configureRefreshControl()
         
     }
     
@@ -37,16 +39,28 @@ class FavoritesViewController: UIViewController {
         detailVC.favoritePodcast = favorites[indexPath.row]
     }
     
-    func loadFavorites() {
-        PodcastAPIClient.getFavorites { (result) in
+    func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(loadFavorites), for: .valueChanged)
+    }
+    
+    @objc func loadFavorites() {
+        PodcastAPIClient.getFavorites { [weak self] (result) in
+            
+            DispatchQueue.main.async {
+              self?.refreshControl.endRefreshing()
+            }
+            
             switch result {
             case .failure(let appError):
                 DispatchQueue.main.async {
-                    self.showAlert(title: "App Error", message: "\(appError)")
+                    self?.showAlert(title: "App Error", message: "\(appError)")
                 }
             case .success(let favorites):
                 DispatchQueue.main.async {
-                    self.favorites = favorites.filter {$0.favoritedBy == "Bob Bobby"}
+                    self?.favorites = favorites.filter {$0.favoritedBy == "Bob Bobby"}
                 }
             }
         }
@@ -68,8 +82,6 @@ extension FavoritesViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 extension FavoritesViewController: UITableViewDelegate {
@@ -80,8 +92,6 @@ extension FavoritesViewController: UITableViewDelegate {
 
 
 // TODO:
+    // show if a podcast has already been favorited in the podcast table view
 
-
-// check if the podcast is already favorited to keep button filled and disabled
-// present favorites that are only mine
 
